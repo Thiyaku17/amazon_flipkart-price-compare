@@ -78,7 +78,7 @@ for t in soup1.find_all('span',attrs={'class':'a-price-whole'},text=True):
         break
 cnt=0
 for t in soup1.find_all('a',attrs={'class':'a-link-normal s-underline-text s-underline-link-text s-link-style a-text-normal','href':re.compile("^https://www.amazon.in/")},href=True):
-      data["Link To Site"].append(f"www.amazon.in{t.get('href')}")
+      data["Link To Site"].append(f"https://www.amazon.in{t.get('href')}")
       cnt+=1
       if cnt==5:
         break
@@ -129,7 +129,7 @@ if len(data["Price"])<=5:
         break
 cnt=0
 for t in soup2.find_all('a',attrs={'class':'_1fQZEK','href':re.compile("^https://www.flipkart.com/")},href=True):
-      data["Link To Site"].append(f"www.flipkart.com{t.get('href')}")
+      data["Link To Site"].append(f"https://www.flipkart.com{t.get('href')}")
       cnt+=1
       if cnt==5:
         break
@@ -145,6 +145,7 @@ if len(data["Link To Site"])<=5:
       cnt+=1
       if cnt==5:
         break
+
 df=pd.DataFrame(data=data)
 df.to_csv(f'{search_for}.csv')
 print(f'Your Output Files Saved As {search_for}.csv')
