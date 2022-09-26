@@ -117,13 +117,13 @@ if len(data["Sold By"])<=5:
 
 cnt=0
 for t in soup2.find_all('div',attrs={'class':'_30jeq3 _1_WHN1'},text=True):
-      data["Price"].append(t.get_text())
+      data["Price"].append(t.get_text()[1:])
       cnt+=1
       if cnt==5:
         break
 if len(data["Price"])<=5:
   for t in soup2.find_all('div',attrs={'class':'_30jeq3'},text=True):
-      data["Price"].append(t.get_text())
+      data["Price"].append(t.get_text()[1:])
       cnt+=1
       if cnt==5:
         break
@@ -135,17 +135,18 @@ for t in soup2.find_all('a',attrs={'class':'_1fQZEK','href':re.compile("^https:/
         break
 if len(data["Link To Site"])<=5:
   for t in soup2.find_all('a',attrs={'class':'IRpwTa','href':re.compile("^https://www.flipkart.com/")},href=True):
-      data["Link To Site"].append(t.get('href'))
+      data["Link To Site"].append(f"https://www.flipkart.com{t.get('href')}")
       cnt+=1
       if cnt==5:
         break
 if len(data["Link To Site"])<=5:
   for t in soup2.find_all('a',attrs={'class':'s1Q9rs','href':re.compile("^https://www.flipkart.com/")},href=True):
-      data["Link To Site"].append(t.get('href'))
+      data["Link To Site"].append(f"https://www.flipkart.com{t.get('href')}")
       cnt+=1
       if cnt==5:
         break
 
 df=pd.DataFrame(data=data)
+print(df)
 df.to_csv(f'{search_for}.csv')
 print(f'Your Output Files Saved As {search_for}.csv')
