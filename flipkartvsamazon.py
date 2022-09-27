@@ -139,13 +139,15 @@ for t in soup2.find_all('a',attrs={'class':'_1fQZEK','href':re.compile("^https:/
         break
 if len(data["Link To Site"])<=5:
   for t in soup2.find_all('a',attrs={'class':'IRpwTa','href':re.compile("^https://www.flipkart.com/")},href=True):
-      data["Link To Site"].append(f"https://www.flipkart.com{t.get('href')}")
+      long_link = f"https://www.flipkart.com{t.get('href')}"
+      data["Link To Site"].append(shorter.tinyurl.short(f'{long_link}'))
       cnt+=1
       if cnt==5:
         break
 if len(data["Link To Site"])<=5:
   for t in soup2.find_all('a',attrs={'class':'s1Q9rs','href':re.compile("^https://www.flipkart.com/")},href=True):
-      data["Link To Site"].append(f"https://www.flipkart.com{t.get('href')}")
+      long_link = f"https://www.flipkart.com{t.get('href')}"
+      data["Link To Site"].append(shorter.tinyurl.short(f'{long_link}'))
       cnt+=1
       if cnt==5:
         break
