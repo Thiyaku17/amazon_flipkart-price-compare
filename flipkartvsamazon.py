@@ -3,6 +3,8 @@ import pandas as pd
 from bs4 import BeautifulSoup
 import requests
 import re
+import pyshorteners
+shorter = pyshorteners.Shortener()
 
 #generating url
 def generate_url(part1,part2,search_for,ch):
@@ -78,7 +80,8 @@ for t in soup1.find_all('span',attrs={'class':'a-price-whole'},text=True):
         break
 cnt=0
 for t in soup1.find_all('a',attrs={'class':'a-link-normal s-underline-text s-underline-link-text s-link-style a-text-normal','href':re.compile("^https://www.amazon.in/")},href=True):
-      data["Link To Site"].append(f"https://www.amazon.in{t.get('href')}")
+      long_link = f"https://www.amazon.in{t.get('href')}"
+      data["Link To Site"].append(shorter.tinyurl.short(f'{long_link}'))
       cnt+=1
       if cnt==5:
         break
@@ -129,7 +132,8 @@ if len(data["Price"])<=5:
         break
 cnt=0
 for t in soup2.find_all('a',attrs={'class':'_1fQZEK','href':re.compile("^https://www.flipkart.com/")},href=True):
-      data["Link To Site"].append(f"https://www.flipkart.com{t.get('href')}")
+      long_link = f"https://www.flipkart.com{t.get('href')}"
+      data["Link To Site"].append(shorter.tinyurl.short(f'{long_link}'))
       cnt+=1
       if cnt==5:
         break
